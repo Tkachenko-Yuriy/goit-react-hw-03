@@ -1,0 +1,21 @@
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 5px;
+  font-size: 14px;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  transition-property: transform;
+}
+
+button:hover {
+  border-color: #fffc64;
+  transform: scale(1.2);
+  transition-duration: 500ms;
+}
+
+button:focus,
+button:focus-visible {
+  outline: none;
+}
