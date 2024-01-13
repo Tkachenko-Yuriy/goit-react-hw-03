@@ -1,4 +1,4 @@
-import css from "./Title.module.css"
+import css from "./Title.module.css";
 export default function Title({ text }) {
-    return <h1 className={css.title}>{text}</h1>;
+  return <h1 className={css.title}>{text}</h1>;
 }
