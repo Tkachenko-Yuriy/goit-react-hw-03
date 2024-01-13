@@ -11,7 +11,7 @@
 }
 
 .item {
-  width: calc(25% - 10px);
+  width: calc(33% - 10px);
   box-sizing: border-box;
   padding: 10px;
   display: flex;
