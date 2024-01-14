@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
+import { nanoid } from "nanoid";
+import Notiflix from 'notiflix';
 import contactList from "../data/contactList.json";
 import Title from "./Title/Title";
 import ContactForm from "./ContactForm/ContactForm";
 import SearchBox from "./SearchForm/SearchBox";
 import ContactList from "./ContactList/ContactList/ContactList";
-import { nanoid } from "nanoid";
 import "./App.css";
 
 function App() {
@@ -37,9 +38,21 @@ function App() {
     return contact.name.toLowerCase().includes(normalizeFilter);
   });
 
+
   const handleAddNewContact = (values) => {
     const newContact = { id: nanoid(), ...values };
+    const uniqueContactName = contacts.some((contact) => contact.name.toLowerCase() === values.name.toLowerCase() )
+    const uniqueContactNumber = contacts.some((contact) => contact.number === values.number )
+    if (uniqueContactName && uniqueContactNumber) {
+      Notiflix.Notify.failure('This contact is already in the contact book');
+      return
+    }
+    if (uniqueContactNumber) {
+      Notiflix.Notify.failure('This contact number is already in the contact book');
+      return
+    }
     setContacts([...contacts, newContact]);
+    Notiflix.Notify.success('Congratulations, the contact has been successfully added');
   };
 
   return (
@@ -49,7 +62,7 @@ function App() {
       <Title text="Phonebook"></Title>
       <ContactForm onChange={handleAddNewContact} />
       <SearchBox label="Find contacts by name" onChange={handleFilterChange} />
-      <ContactList items={filteredContacts} onChange={handleDelete} />
+      <ContactList items={filteredContacts} onClick={handleDelete} />
     </div>
   );
 }
